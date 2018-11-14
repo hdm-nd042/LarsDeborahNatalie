@@ -1,14 +1,14 @@
-#### AllinOne
+#############AllinOne#############
 
 # Laden vom igraph- und visNetwork Paket
 library("igraph")
 library("visNetwork")
 
 # Einlesen der Edge- und Nodelist
-elBundesliga<- read.csv("AllinOne - Edgelist.csv",header=T, as.is=T)
-nlBundesliga<- read.csv("AllinOne - Nodelist.csv", header=T, as.is=T)
+elBundesliga<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/AllinOne%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
+nlBundesliga<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/AllinOne%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# PrÃ¼fen der Daten
+# Prüfen der Daten
 head(elBundesliga)
 head(nlBundesliga)
 
@@ -31,14 +31,14 @@ E(bundesliga)$color <- "lightblue"
 E(bundesliga)$arrow.size <- .4
 plot(bundesliga)
 
-# NetzwerkmaÃŸe berechnen
+# Netzwerkmaße berechnen
 is_connected(bundesliga)
 components(bundesliga)
 edge_density(bundesliga)
 triad_census(bundesliga)
 distances(bundesliga, v = V(bundesliga), to = V(bundesliga))
 
-# AkteurmaÃŸe berechnen
+# Akteurmaße berechnen
 degree(bundesliga)
 degree(bundesliga, V(bundesliga)$type == "2", mode = c("in"), loops = TRUE, normalized = TRUE)
 eigen_centrality(bundesliga)
@@ -48,7 +48,7 @@ coreness(bundesliga)
 vcolorbundesliga <-vcount(bundesliga)
 vcolorbundesliga[V(bundesliga)$type == "1"] <-"green"
 vcolorbundesliga[V(bundesliga)$type == "2"] <-"gold"
-coords <- layout_with_kk(bundesliga)*0.22
+coords <- layout_with_kk(bundesliga)*0.1
 plot(bundesliga, edge.arrow.size=0.1, edge.label=E(bundesliga)$time, edge.label.cex=c(0.5), edge.color="lightgrey", vertex.color=vcolorbundesliga,vertex.size= ifelse(V(bundesliga)$type=="1",degree(bundesliga)/3,3),vertex.frame.color = "transparent", vertex.label.family = "Helvetica", vertex.label.color = "black", vertex.label.cex=c(0.5),layout = coords, rescale = FALSE, ylim=c(-1.5,2.2),xlim=c(-0.5,0.5))
 
 # Visualisierung mit dem visNetwork-Paket
@@ -64,27 +64,27 @@ bundesliga2011
 vcolorbundesliga2011 <-vcount(bundesliga2011)
 vcolorbundesliga2011[V(bundesliga2011)$type == "1"] <-"green"
 vcolorbundesliga2011[V(bundesliga2011)$type == "2"] <-"gold"
-coords2011 <- layout_with_kk(bundesliga2011)*0.4
+coords2011 <- layout_with_kk(bundesliga2011)*0.1
 plot(bundesliga2011, edge.arrow.size=0.1, edge.label=E(bundesliga2011)$time, edge.label.cex=c(0.5), edge.color="lightgrey", vertex.color=vcolorbundesliga2011,vertex.size= ifelse(V(bundesliga2011)$type=="1",degree(bundesliga2011)/3,3),vertex.frame.color = "transparent", vertex.label.family = "Helvetica", vertex.label.color = "black", vertex.label.cex=c(0.5),layout = coords2011, rescale = FALSE, ylim=c(-1.5,2.2),xlim=c(-0.5,0.5))
 visIgraph(bundesliga2011, type = "full")
 
 # Egonetzwerk Jerome Boateng
 
-# Frage: Beim AusfÃ¼hren des Plot-Befehls erscheint das Ego-Netzwerk von Boateng, jedoch mit falschen Edge Labels. Woran liegt das ?
+# Frage: Beim Ausführen des Plot-Befehls erscheint das Ego-Netzwerk von Boateng, jedoch mit falschen Edge Labels. Woran liegt das ?
 # edge.label=Boateng[[1]]$time || Boateng, da wir seine edges wollen und nicht die der Bundesliga
 Boateng <- make_ego_graph(bundesliga, order=1, c("Jerome Agyenim Boateng"))
-plot(Boateng[[1]],  edge.arrow.size=0.1, vertex.color="green", vertex.size=2, edge.color = "lightgrey", edge.label=Boateng[[1]]$time,edge.label.cex=c(1), vertex.label.color="black", vertex.frame.color="transparent")
+plot(Boateng[[1]],  edge.arrow.size=0.1, vertex.color="green", vertex.size=2, edge.color = "lightgrey", edge.label=E(Boateng[[1]])$time,edge.label.cex=c(1), vertex.label.color="black", vertex.frame.color="transparent")
 
 
-##### Fc Bayer Muenchen und VfB Stuttgart
+#############Fc Bayer Muenchen und VfB Stuttgart#############
 
-elBayern<- read.csv("FC Bayern Muenchen - Edgelist.csv",header=T, as.is=T)
-nlBayern<- read.csv("FC Bayern Muenchen - Nodelist.csv", header=T, as.is=T)
+elBayern<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/FC%20Bayern%20Muenchen%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
+nlBayern<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/FC%20Bayern%20Muenchen%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-elVfB<- read.csv("VfB Stuttgart - Edgelist.csv",header=T, as.is=T)
-nlVfB<- read.csv("VfB Stuttgart - Nodelist.csv", header=T, as.is=T)
+elVfB<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/VfB%20Stuttgart%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
+nlVfB<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/VfB%20Stuttgart%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# PrÃ¼fen der Daten
+# Prüfen der Daten
 head(elBayern)
 head(nlBayern)
 
@@ -128,7 +128,8 @@ visIgraph(VfB, type = "full")
 
 plot(Bayern, edge.arrow.size=0.1, edge.label=E(Bayern)$time, edge.label.cex=c(0.5), edge.color="lightgrey", vertex.color=vcolorBayern,vertex.size= ifelse(V(Bayern)$type=="1",degree(Bayern)/3,3),vertex.frame.color = "transparent", vertex.label.family = "Helvetica", vertex.label.color = "black", vertex.label.cex=c(0.5),layout = coordsBayern, rescale = FALSE, ylim=c(-2.2,2.2),xlim=c(-0.5,2.2))
 plot(VfB, edge.arrow.size=0.1, edge.label=E(VfB)$time, edge.label.cex=c(0.5), edge.color="lightgrey", vertex.color=vcolorVfB,vertex.size= ifelse(V(VfB)$type=="1",degree(VfB)/3,3),vertex.frame.color = "transparent", vertex.label.family = "Helvetica", vertex.label.color = "black", vertex.label.cex=c(0.5),layout = coordsVfB, rescale = FALSE, ylim=c(-2.2,2.2),xlim=c(-0.5,2.2))
-####  Mueller und Gomez
+
+#############Mueller und Gomez#############
 
 # Laden von Paketen
 library(png)
@@ -137,13 +138,13 @@ library(ggraph)
 library(grid)
 
 # Einlesen der Edge- und Nodelist
-elMueller<- read.csv("Mueller - Edgelist.csv",header=T, as.is=T)
-nlMueller<- read.csv("Mueller - Nodelist.csv", header=T, as.is=T)
+elMueller<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Mueller%20-%20Edgelist.csv",header=T, as.is=T)
+nlMueller<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Mueller%20-%20Nodelist.csv", header=T, as.is=T)
 
-elGomez<- read.csv("Gomez - Edgelist.csv",header=T, as.is=T)
-nlGomez<- read.csv("Gomez - Nodelist.csv", header=T, as.is=T)
+elGomez<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Gomez%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
+nlGomez<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Gomez%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# PrÃ¼fen der Daten
+# Prüfen der Daten
 head(elMueller)
 head(nlMueller)
 
@@ -161,22 +162,82 @@ gomez <- tbl_graph(
 
 #Arc diagram Mueller
 ggraph(mueller, layout = "linear" ) + 
-  geom_edge_arc(aes(label = time)) + 
-  geom_node_text(aes(label = id), size = 3, repel = TRUE)+ 
+  geom_edge_arc(aes(label = time)) + #aes, damit sich darauffolgende argumente auf das label beziehen, bsp. colour
+  geom_node_text(aes(label = id), size = 3, repel = TRUE)+ #Vereinnamen #repel=True damit nicht überlappen
   theme_graph()
 
 #Arc diagram Gomez
 ggraph(gomez, layout = "linear" ) + 
-  geom_edge_arc(aes(label = time)) + 
-  geom_node_text(aes(label = id), size = 3, repel = FALSE)+ 
+  geom_edge_arc(aes(label = time)) + #aes, damit sich darauffolgende argumente auf das label beziehen, bsp. colour
+  geom_node_text(aes(label = id), size = 3, repel = FALSE)+ #Vereinnamen #repel=True damit nicht überlappen
   theme_graph()
 
 # Arc diagram mit "Beispiel" Hintergrundbild
-ima <- readPNG("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/FC_Bayern_Muenchen.png")
+ima <- readPNG("C:/Users/ds160/Desktop/226305_Projekt_Bundesliga_final/FC_Bayern_Muenchen.png")
 ggraph(mueller, layout = "linear") + 
   annotation_custom(rasterGrob(ima, width = unit(0.25,"npc"), height = unit(0.25,"npc")),-Inf, Inf, -Inf, Inf)+
-  geom_edge_arc(aes(label = time)) + 
-  geom_node_text(aes(label = id), size = 5, repel = TRUE)+ 
+  geom_edge_arc(aes(label = time)) + #aes, damit sich darauffolgende argumente auf das label beziehen, bsp. colour
+  geom_node_text(aes(label = id), size = 5, repel = TRUE)+ #Vereinnamen #repel=True damit nicht überlappen
   theme_graph()
 
+#############Test#############
+library("igraph")
+elBundesliga<- read.csv("Jugend-Edgelist.csv",header=T, as.is=T, sep=",")
+nlBundesliga<- read.csv("Jugend-Nodelist.csv", header=T, as.is=T, sep=",")
+maBundesliga <- as.matrix(elBundesliga)
+bundesliga <-graph_from_data_frame(d=maBundesliga,vertices=nlBundesliga, directed=T)
+bundesliga
+options(max.print=1000000)
+vcount(bundesliga)
+deg<- degree(bundesliga)
+deg
 
+#Berechnung der Degrees der Jugendvereine, optional max(), min()
+deJugendvereine<- min(degree(bundesliga, mode="out")[V(bundesliga)$detail=="3"])
+deJugendvereine
+
+##Geht noch nicht 
+V(bundesliga)$label[V(bundesliga)$detail=="3"][degree(bundesliga)==max(degree(bundesliga))]
+
+#Berechnung der Degrees der Vereine der 1. Bundesliga, optional max(), min()
+deBundesligaVereine<- degree(bundesliga)[V(bundesliga)$detail=="6"]
+deBundesligaVereine
+V(bundesliga)$label[V(bundesliga)$detail=="6"][degree(bundesliga)==max(degree(bundesliga))]
+
+#Berechnung der Degrees aller Vereine welche nicht in der 1 Bundesliga sind, optional max(), min()
+deNichtBundesligaVereine<- degree(bundesliga)[V(bundesliga)$detail=="4"]
+deNichtBundesligaVereine
+V(bundesliga)$label[V(bundesliga)$detail=="4"][degree(bundesliga)==max(degree(bundesliga))]
+
+
+m <- make_ego_graph(bundesliga,order = 1, c("FC Bayern Muenchen Jugend"))      #in c("") die jeweilige id des Knoten eintragen #oder order= 2
+plot(m[[1]],edge.arrow.size=0.1, edge.label.size=.1, edge.label=E(m[[1]])$time, edge.label.cex=c(1), edge.color="lightgrey",vertex.size=5, vertex.frame.color = "transparent", vertex.label.family = "Helvetica", vertex.label.color = "black", vertex.label.cex=c(1))
+
+#############Stuff#############
+da<-delete.vertices(bundesliga,V(bundesliga)$label 
+                %in% grep("*Jugend",V(bundesliga)$label,value=T))
+
+
+plot(da)
+degree(da)
+
+dat<-sample(0:100,100,rep=FALSE)
+maximum<-V(bundesliga)$label[V(bundesliga)$type=="2"][order(dat,decreasing = TRUE)]
+maximum
+       
+
+      
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga))]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga)-1)]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga))-2]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga))-3]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga))-4]
+
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga, mode = "out"))]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga, mode = "out"))-1]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga, mode = "in"))-2]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga, mode = "in"))-3]
+V(bundesliga)$label[degree(bundesliga)==max(degree(bundesliga, mode = "in"))-4]
+
+
+induced_subgraph(bundesliga, V(bundesliga), impl = c("auto")) # letters
