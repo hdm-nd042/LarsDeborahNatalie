@@ -3,13 +3,13 @@
 # Laden vom igraph- und visNetwork Paket
 library("igraph")
 library("visNetwork")
-# Achtung, durch den folgenden Befehl wir die Ausgabe in der Konsole auf 1000000 Zeilen erweitert. Dies kann bei einigen im Skript folgenden Befehlen zu langen Ladezeiten oder Absturz von R-Studio führen
+# Achtung, durch den folgenden Befehl wir die Ausgabe in der Konsole auf 1000000 Zeilen erweitert. Dies kann bei einigen im Skript folgenden Befehlen zu langen Ladezeiten oder Absturz von R-Studio fÃ¼hren
 options(max.print=1000000)
 # Einlesen der Edge- und Nodelist
 elBundesliga<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/AllinOne%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
 nlBundesliga<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/AllinOne%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# Prüfen der Daten
+# PrÃ¼fen der Daten
 head(elBundesliga)
 head(nlBundesliga)
 
@@ -31,14 +31,14 @@ E(bundesliga)$color <- "lightblue"
 E(bundesliga)$arrow.size <- .4
 plot(bundesliga)
 
-# Netzwerkmaße berechnen
+# NetzwerkmaÃŸe berechnen
 is_connected(bundesliga)
 components(bundesliga)
 edge_density(bundesliga)
 triad_census(bundesliga)
 distances(bundesliga, v = V(bundesliga), to = V(bundesliga))
 
-# Akteurmaße berechnen
+# AkteurmaÃŸe berechnen
 degree(bundesliga)
 degree(bundesliga, V(bundesliga)$type == "2", mode = c("in"), loops = TRUE, normalized = TRUE)
 eigen_centrality(bundesliga)
@@ -85,7 +85,7 @@ V(bundesliga)$frame.color <- "transparent"
 V(bundesliga)$label.color <- "black"
 E(bundesliga)$label <- E(bundesliga)$time
 
-# Achtung, aufgrund der Größe des Netzwerkes dauert die Durchführung des folgenden Befehles lange und kann zum Abbruch von R Studio führen
+# Achtung, aufgrund der GrÃ¶ÃŸe des Netzwerkes dauert die DurchfÃ¼hrung des folgenden Befehles lange und kann zum Abbruch von R Studio fÃ¼hren
 visIgraph(bundesliga, type = "full")
 
 # VisNetwork Visualisierung mit besserer Performance
@@ -105,7 +105,7 @@ plot(bundesliga2011, edge.arrow.size=0.1, edge.label=E(bundesliga2011)$time, edg
 visIgraph(bundesliga2011, type = "full")
 
 #############Egonetzwerk Michael Esser#############
-#Berechnung der Degrees der Vereine der 1. Bundesliga, optional max(), min()
+#Berechnung der Degrees der Spieler, optional max(), min()
 degBundesligaSpieler<- degree(bundesliga)[V(bundesliga)$type=="1"]
 degBundesligaSpieler
 
@@ -119,7 +119,7 @@ nlBayern<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNata
 elVfB<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/VfB%20Stuttgart%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
 nlVfB<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/VfB%20Stuttgart%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# Prüfen der Daten
+# PrÃ¼fen der Daten
 head(elBayern)
 head(nlBayern)
 
@@ -180,7 +180,7 @@ nlMueller<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNat
 elGomez<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Gomez%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
 nlGomez<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Gomez%20-%20Nodelist.csv", header=T, as.is=T, sep=",")
 
-# Prüfen der Daten
+# PrÃ¼fen der Daten
 head(elMueller)
 head(nlMueller)
 
@@ -280,7 +280,7 @@ plot(JugendAugsburg, edge.arrow.size=0.1, edge.label.size=.1, edge.label=E(Jugen
 
 # FC Bayern Muenchen aktueller Kader
 
-# Daten für das VisNetwork generieren
+# Daten fÃ¼r das VisNetwork generieren
 dataBayern2018 <- toVisNetworkData(Bayern2018)
 
 # Bild Pfad festlegen
@@ -316,7 +316,7 @@ visNetwork(nodesJugendBayern,edgesJugendBayern, width = "100%",height = "700px")
 
 # FC Augsburg aktueller Kader
 
-# Daten für das VisNetwork generieren
+# Daten fÃ¼r das VisNetwork generieren
 dataAugsburg2018 <- toVisNetworkData(Ausgburg2018)
 
 # Bild Pfad festlegen
@@ -335,7 +335,7 @@ visNetwork(nodesAugsburg2018,edgesAugsburg2018, width = "100%",height = "700px")
 
 # FC Augsburg Jugend
 
-# Daten für das VisNetwork generieren
+# Daten fÃ¼r das VisNetwork generieren
 dataJugendAugsburg <- toVisNetworkData(JugendAugsburg)
 
 # Bild Pfad festlegen
