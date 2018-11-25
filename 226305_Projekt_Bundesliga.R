@@ -104,11 +104,13 @@ plot(bundesliga2011, edge.arrow.size=0.1, edge.label=E(bundesliga2011)$time, edg
 #Visualisierung des Teilnetzwerkes 2011 mit visNetwork
 visIgraph(bundesliga2011, type = "full")
 
-#############Egonetzwerk Jerome Boateng#############
-Boateng <- make_ego_graph(bundesliga, order=1, c("Jerome Agyenim Boateng"))
-plot(Boateng[[1]],  edge.arrow.size=0.1, vertex.color="green", vertex.size=2, edge.color = "lightgrey", edge.label=E(Boateng[[1]])$time,edge.label.cex=c(1), vertex.label.color="black", vertex.frame.color="transparent")
+#############Egonetzwerk Michael Esser#############
+#Berechnung der Degrees der Vereine der 1. Bundesliga, optional max(), min()
+degBundesligaSpieler<- degree(bundesliga)[V(bundesliga)$type=="1"]
+degBundesligaSpieler
 
-
+Esser <- make_ego_graph(bundesliga, order=1, c("Michael Esser"))
+plot(Esser[[1]],  edge.arrow.size=0.1, vertex.color="green", vertex.size=2, edge.color = "lightgrey", edge.label=E(Esser[[1]])$time,edge.label.cex=c(1), vertex.label.color="black", vertex.frame.color="transparent")
 #############Fc Bayer Muenchen und VfB Stuttgart#############
 # Visualisierung vom FC Bayern Muenchen Netzwerk und VFB Stuttgart Netzwerk
 elBayern<- read.csv("https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/FC%20Bayern%20Muenchen%20-%20Edgelist.csv",header=T, as.is=T, sep=",")
@@ -206,12 +208,21 @@ ggraph(gomez, layout = "linear" ) +
   geom_node_text(aes(label = id), size = 2, repel = FALSE)+
   theme_graph()
 
-# Arc diagram mit "Beispiel" Hintergrundbild
+# Arc diagram mit Hintergrundbild
 link <-"https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Images/Bayern/Profis/22.png"
 download.file(link,'link.jpg', mode = 'wb')
 im <-readPNG("link.jpg",native=TRUE)
 ggraph(mueller, layout = "linear") + 
   annotation_custom(rasterGrob(im, width = unit(0.25,"npc"), height = unit(0.5,"npc")),-Inf, Inf, -Inf, Inf)+
+  geom_edge_arc(aes(label = time))+
+  geom_node_text(aes(label = id), size = 5, repel = TRUE)+
+  theme_graph()
+
+linkTwo <-"https://raw.githubusercontent.com/hdm-nd042/LarsDeborahNatalieDaniel/master/Images/Gomez.png"
+download.file(linkTwo,'linkTwo.jpg', mode = 'wb')
+imTwo <-readPNG("linkTwo.jpg",native=TRUE)
+ggraph(gomez, layout = "linear") + 
+  annotation_custom(rasterGrob(imTwo, width = unit(0.25,"npc"), height = unit(0.5,"npc")),-Inf, Inf, -Inf, Inf)+
   geom_edge_arc(aes(label = time))+
   geom_node_text(aes(label = id), size = 5, repel = TRUE)+
   theme_graph()
